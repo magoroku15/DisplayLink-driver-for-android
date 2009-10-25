@@ -1,0 +1,10 @@
+menuconfig FB_DISPLAYLINK
+        tristate "Displaylink frame buffer support (EXPERIMENTAL)"
+        depends on FB 
+        select FB_MODE_HELPERS
+        select FB_CFB_FILLRECT
+        select FB_CFB_COPYAREA
+        select FB_CFB_IMAGEBLIT
+        help
+          Frame buffer driver for Displaylink based module.
+
