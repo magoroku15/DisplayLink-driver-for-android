@@ -1,0 +1,18 @@
+Displaylink USB-LCD kernel driver for android
+
+a)Install
+ Check your USB-LCD module vendor-ID and product-ID,
+ then rewrite or add in displaylink-main.c.
+  {.idVendor = 0x17e9, .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
+  
+ You can use the Makefile buildin and module.
+
+ If you use it in kernel modules, please add this module in Kconfig
+ in drivers/video/
+
+b)USB configuration
+ Some USB-LCD modules based on DisplayLink, Zero installation model.
+ First step it apper CD-ROM keeping windows driver, then you moust change
+ configiuration bit manually. In my case udev and usemode-switch.
+
+enjoy
