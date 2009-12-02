@@ -264,9 +264,9 @@ static int displaylink_fb_setpar(struct fb_info *info) {
 	if (dev->udev == NULL)
                 return -EINVAL;
 
-	printk("setting hardware to %d %d\n", info->var.xres, info->var.yres);
+	//printk("setting hardware to %d %d\n", info->var.xres, info->var.yres);
 
-	displaylink_set_video_mode(dev, 0, info->var.xres, info->var.yres, 0);
+	//displaylink_set_video_mode(dev, 0, info->var.xres, info->var.yres, 0);
 
 	info->fix.line_length = dev->line_length;
 
@@ -303,8 +303,7 @@ static int displaylink_pan_display(struct fb_var_screeninfo *var,
 
 	//if (display && display->update)
 	//	display->update(display, 0, 0, var->xres, var->yres);
-	printk("displaylink_pan_display: var->xres %d var->yres %d fbi->var.xoffset %d fbi->var.yoffset %d\n", 
-	var->xres, var->yres, fbi->var.xoffset, fbi->var.yoffset);
+	//printk("displaylink_pan_display: var->xres %d var->yres %d fbi->var.xoffset %d fbi->var.yoffset %d\n", var->xres, var->yres, fbi->var.xoffset, fbi->var.yoffset);
 
 	if (fbi->var.yoffset) 
 	displaylink_image_blit(dev, 0, 0, var->xres, var->yres, fbi->screen_base + dev->screen_size/2);
@@ -330,15 +329,15 @@ static int displaylink_fb_checkvar(struct fb_var_screeninfo *var, struct fb_info
 
 	edid = (struct edid *) dev->edid ;
 
-	printk("checking for resolution %d %d\n", var->xres, var->yres);
+	//printk("checking for resolution %d %d\n", var->xres, var->yres);
 
 	for(i=0;i<4;i++) {
 		best_edid = (struct detailed_timing *) &edid->detailed_timings[i];
 		if (EDID_GET_WIDTH(best_edid) == 0)
 			break;
-		printk("edid %dX%d\n", EDID_GET_WIDTH(best_edid), EDID_GET_HEIGHT(best_edid));
+		//printk("edid %dX%d\n", EDID_GET_WIDTH(best_edid), EDID_GET_HEIGHT(best_edid));
 		if (EDID_GET_WIDTH(best_edid) == var->xres && EDID_GET_HEIGHT(best_edid) == var->yres) {
-			printk("found valid resolution for displaylink device\n");
+			//printk("found valid resolution for displaylink device\n");
 			return 0;
 		}
 	}
@@ -348,9 +347,9 @@ static int displaylink_fb_checkvar(struct fb_var_screeninfo *var, struct fb_info
 		if ((std_edid->hsize*8)+248 < 320) {
 			break;
 		}
-		printk("edid (std) %d %d %d %d\n", (std_edid->hsize*8)+248, (((std_edid->hsize*8)+248)/4)*3, std_edid->vfreq+60, std_edid->aspect_ratio);
+		//printk("edid (std) %d %d %d %d\n", (std_edid->hsize*8)+248, (((std_edid->hsize*8)+248)/4)*3, std_edid->vfreq+60, std_edid->aspect_ratio);
 		if ((std_edid->hsize*8)+248 == var->xres && (((std_edid->hsize*8)+248)/4)*3 == var->yres) {
-			printk("found valid resolution for displaylink device\n");
+			//printk("found valid resolution for displaylink device\n");
 			return 0;
 		}
 	}
